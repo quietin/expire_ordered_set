@@ -112,7 +112,8 @@ class ExpireOrderSet(MutableSet):
     def __reversed__(self):
         with self._lock:
             self.__del_expire_keys()
-            return self.__class__(OrderedDict(reversed(self._time_map)))
+            return self.__class__(
+                OrderedDict(reversed(self._time_map.items())))
 
     def pop_last(self):
         """Return the popped value.  Raise KeyError if empty."""
