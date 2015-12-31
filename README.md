@@ -11,30 +11,30 @@ Besides, eoset realize some interface which like handle list such as `__getitem_
 + -1 *key exist and never expire*
 
 e.g.
+```bash
+python -i eoset.py
+```
+and then
 ```python
-from eoset import eoset
-import time
-
-item = eoset('jljfsdfadf')
-print item
-# ExpireOrderSet(['j', 'l', 'f', 's', 'd', 'a'])
-print reversed(item)
-# ExpireOrderSet(['a', 'd', 's', 'f', 'l', 'j'])
-print item[3]
-# s
-
-print item.pop()  # j
-print item.pop_last() # a
-print item
-# ExpireOrderSet(['l', 'f', 's', 'd'])
-
-item.expires(50)
-print item.ttls()
-# [('d', '50.0000'), ('s', '50.0000'), ('l', '50.0000'), ('f', '50.0000')]
-item.expire('d', 4)
-print item.ttl('d')
-# 4.0000
-time.sleep(5)
-print item.ttl('d')
-# -2
+>>> item = eoset('jljfsdfadf')
+>>> reversed(item)
+ExpireOrderSet(['a', 'd', 's', 'f', 'l', 'j'])
+>>> item[3]
+'s'
+>>> item.pop()
+'j'
+>>> item.pop_last()
+'a'
+>>> item
+ExpireOrderSet(['l', 'f', 's', 'd'])
+>>> item.expires(50)
+>>> item.ttls()
+[('d', '43.6890'), ('s', '43.6890'), ('l', '43.6890'), ('f', '43.6890')]
+>>> item.expire('d', 20)
+1
+>>> item.ttl('d')
+'15.5761'
+>>> time.sleep(16)
+>>> item.ttl('d')
+-2
 ```
