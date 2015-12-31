@@ -3,12 +3,12 @@ eoset support full `set` api. This structure can remember item insert order, and
 Besides, eoset realize some interface which like handle list such as `__getitem__`, `__reversed__` and another pop method `pop_last`.
 
 **expire method return value**
-+ 0  *key not exist*
-+ 1  *set timeout successfully*
++ 0 :  *key not exist*
++ 1 :  *set timeout successfully*
 
 **ttl method return value**
-+ -2 *key not exist*
-+ -1 *key exist and never expire*
++ -2 : *key not exist*
++ -1 : *key exist and never expire*
 
 e.g.
 ```bash
