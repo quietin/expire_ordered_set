@@ -1,4 +1,6 @@
 # expire_ordered_set
+![](https://travis-ci.org/quietin/expire_ordered_set.svg?branch=master) 
+
 eoset support full `set` api. This structure can remember item insert order, and offer expire support for single item.  
 Besides, eoset realize some interface which like handle list such as `__getitem__`, `__reversed__` and another pop method `pop_last`.
 
