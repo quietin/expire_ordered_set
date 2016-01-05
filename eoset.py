@@ -9,10 +9,7 @@ class ExpireOrderSet(MutableSet):
         """fromkeys default value is None which represents never expire"""
         self._time_map = OrderedDict()
         if iterable is not None:
-            if isinstance(iterable, OrderedDict):
-                self._time_map = iterable
-            else:
-                self._time_map = OrderedDict.fromkeys(iterable)
+            self._time_map = OrderedDict.fromkeys(iterable)
 
     def expire(self, key, ttl):
         """
@@ -24,7 +21,8 @@ class ExpireOrderSet(MutableSet):
         try:
             expire_time = self._time_map[key]
             if not expire_time:
-                self._time_map[key] = time() + ttl
+                if ttl > 0:
+                    self._time_map[key] = time() + ttl
                 return 1
             rest_time = expire_time - time()
             if rest_time > 0:
@@ -47,7 +45,7 @@ class ExpireOrderSet(MutableSet):
 
     @staticmethod
     def _format_time(t):
-        return '{:.4f}'.format(t)
+        return float('{:.4f}'.format(t))
 
     def __del_expire_keys(self):
         for k, v in self._time_map.iteritems():
@@ -101,7 +99,7 @@ class ExpireOrderSet(MutableSet):
 
     def __reversed__(self):
         self.__del_expire_keys()
-        return self.__class__(reversed(self._time_map))
+        return reversed(self._time_map.keys())
 
     def pop_last(self):
         """Return the popped value.  Raise KeyError if empty."""
