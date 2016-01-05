@@ -1,5 +1,10 @@
 from time import time
-from collections import MutableSet, OrderedDict
+from collections import MutableSet
+
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 
 __all__ = ['eoset']
 
@@ -53,7 +58,9 @@ class ExpireOrderSet(MutableSet):
                 del self._time_map[k]
 
     def ttl(self, key):
-        """returns -2 if the key does not exist.
+        """set ttl
+
+        returns -2 if the key does not exist.
         returns -1 if the key exists but has no associated expire
         """
         try:
