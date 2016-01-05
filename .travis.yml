@@ -7,5 +7,7 @@ python:
   - "3.4"
   - "3.5"
   - "pypy"
+install:
+    - if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then travis_retry pip install ordereddict; fi
 script:
   - python test.py
