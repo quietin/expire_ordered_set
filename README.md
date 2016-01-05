@@ -18,7 +18,7 @@ and then
 ```python
 >>> item = eoset('jljfsdfadf')
 >>> reversed(item)
-ExpireOrderSet(['a', 'd', 's', 'f', 'l', 'j'])
+<listreverseiterator at 0x101fa3710>
 >>> item[3]
 's'
 >>> item.pop()
